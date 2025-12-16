@@ -1,5 +1,16 @@
 # 🇮🇩 Indonesia Location for Laravel
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/edi-prasetyo/indonesia-location.svg)](https://packagist.org/packages/edi-prasetyo/indonesia-location)
+[![Total Downloads](https://img.shields.io/packagist/dt/edi-prasetyo/indonesia-location.svg)](https://packagist.org/packages/edi-prasetyo/indonesia-location)
+[![License](https://img.shields.io/packagist/l/edi-prasetyo/indonesia-location.svg)](https://packagist.org/packages/edi-prasetyo/indonesia-location)
+[![PHP Version Require](https://img.shields.io/packagist/php-v/edi-prasetyo/indonesia-location)](https://packagist.org/packages/edi-prasetyo/indonesia-location)
+[![Laravel](https://img.shields.io/badge/Laravel-11%2B-red)](https://laravel.com)
+[![Composer](https://img.shields.io/badge/Composer-required-885630)](https://getcomposer.org/)
+[![Stability](https://img.shields.io/badge/stability-stable-green)](https://packagist.org/packages/edi-prasetyo/indonesia-location)
+[![GitHub stars](https://img.shields.io/github/stars/edi-prasetyo/indonesia-location?style=social)](https://github.com/edi-prasetyo/indonesia-location)
+
+
+
 **edi-prasetyo/indonesia-location** adalah package Laravel untuk menyediakan data wilayah administratif Indonesia (Provinsi, Kabupaten/Kota, Kecamatan, Desa) lengkap dengan **relasi database** dan **model Eloquent**.
 
 Package ini dirancang untuk:
@@ -32,12 +43,6 @@ composer require edi-prasetyo/indonesia-location
 
 Package ini mendukung **auto-discovery**, tidak perlu menambahkan Service Provider secara manual.
 
-```bash
-php artisan package:discover
----
-
-## 🗄 Publish & Migrasi Database
-
 ### 1️⃣ Publish file migration
 
 ```bash
@@ -60,28 +65,19 @@ Jalankan command berikut:
 php artisan indonesia-location:install
 ```
 
-Command ini akan:
-
-1. Mengimport **provinces**
-2. Mengimport **regencies** (mapping ke `province_id`)
-3. Mengimport **districts** (mapping ke `regency_id`)
-4. Mengimport **villages** (mapping ke `district_id`)
-
-⚠️ Aman dijalankan ulang karena menggunakan `updateOrCreate()`.
-
 ---
 
-## 🧠 Struktur Database
+## Struktur Database
 
 ### provinces
 
-| column    | type    |
-| --------- | ------- |
-| id        | bigint  |
-| code      | string  |
-| name      | string  |
-| latitude  | decimal |
-| longitude | decimal |
+| column        | type        |
+| ------------- | ----------- |
+| id            | bigint      |
+| code          | string      |
+| name          | string      |
+| latitude      | decimal     |
+| longitude     | decimal     |
 
 ### regencies
 
@@ -89,35 +85,51 @@ Command ini akan:
 | ------------- | ----------- |
 | id            | bigint      |
 | province_id   | bigint (FK) |
-| province_code | string      |
 | code          | string      |
+| province_code | string      |
 | name          | string      |
+| latitude      | decimal     |
+| longitude     | decimal     |
 
 ### districts
 
-| column      | type        |
-| ----------- | ----------- |
-| id          | bigint      |
-| province_id | bigint (FK) |
-| regency_id  | bigint (FK) |
-| code        | string      |
-| name        | string      |
+| column        | type        |
+| ------------- | ----------- |
+| id            | bigint      |
+| province_id   | bigint (FK) |
+| regency_id    | bigint (FK) |
+| code          | string      |
+| province_code | string      |
+| regency_code  | string      |
+| name          | string      |
+| latitude      | decimal     |
+| longitude     | decimal     |
 
 ### villages
 
-| column      | type        |
-| ----------- | ----------- |
-| id          | bigint      |
-| province_id | bigint (FK) |
-| regency_id  | bigint (FK) |
-| district_id | bigint (FK) |
-| code        | string      |
-| name        | string      |
-| postal_code | string      |
+| column        | type        |
+| ------------- | ----------- |
+| id            | bigint      |
+| province_id   | bigint (FK) |
+| regency_id    | bigint (FK) |
+| district_id   | bigint (FK) |
+| code          | string      |
+| province_code | string      |
+| regency_code  | string      |
+| district_code | string      |
+| name          | string      |
+| postal_code   | string      |
+| latitude      | decimal     |
+| longitude     | decimal     |
 
 ---
 
 ## 📘 Penggunaan Model
+
+* use EdiPrasetyo\IndonesiaLocation\Models\Province;
+* use EdiPrasetyo\IndonesiaLocation\Models\Regency;
+* use EdiPrasetyo\IndonesiaLocation\Models\District;
+* use EdiPrasetyo\IndonesiaLocation\Models\Village;
 
 ### Ambil semua provinsi
 
